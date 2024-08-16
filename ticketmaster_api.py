@@ -183,6 +183,10 @@ def verify_OTP(session, verify_link, otp):
     resp = session.post(verify_link, json=payload)
     return session, resp.text 
 
+def capture_info(session):
+    resp = session.get('https://my.ticketmaster.com/user-account/json/profile')
+    return session, resp.text
+
 def save_device(session, client_token, otp_token):
     session.headers.update({"Host": "identity.ticketmaster.com",
                             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0",
