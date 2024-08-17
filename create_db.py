@@ -41,4 +41,32 @@ def add_account_age_column():
     conn.close()
 
 # Call this function once to add the column
-add_account_age_column()
+def update_sessions_table():
+    # Connect to SQLite database
+    conn = sqlite3.connect('sessions.db')
+    cur = conn.cursor()
+
+    # Add the account_age and pw columns if they don't exist
+    try:
+        cur.execute('''
+        ALTER TABLE sessions ADD COLUMN account_age TEXT
+        ''')
+    except sqlite3.OperationalError:
+        # Column already exists
+        pass
+
+    try:
+        cur.execute('''
+        ALTER TABLE sessions ADD COLUMN pw TEXT
+        ''')
+    except sqlite3.OperationalError:
+        # Column already exists
+        pass
+
+    # Commit and close the connection
+    conn.commit()
+    cur.close()
+    conn.close()
+
+# Call this function once to update the table
+update_sessions_table()

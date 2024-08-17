@@ -181,6 +181,8 @@ def verify_OTP(session, verify_link, otp):
     payload = {"otp":f"{otp}"}
 
     resp = session.post(verify_link, json=payload)
+    print('verify otp response')
+    print(resp.text)
     return session, resp.text 
 
 def capture_info(session):
