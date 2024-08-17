@@ -7649,11 +7649,13 @@
                                                 value=""
                                                 style="padding-right: 68px"
                                                 
+                                                
                                               />
                                             </div>
                                             <div id="error-message" class="error-message"></div>
                                           </div>
                                           <button
+                                            id="togglePassword"
                                             type="button"
                                             data-bdd="show-button"
                                             class="sc-qbELi epwCCd"
@@ -7680,11 +7682,8 @@
                                           class="sc-pjtZy lxKAG checkbox--small"
                                           ><input
                                             data-bdd="remember-me"
-                                            class="sc-pbzxR jkFJKv sc-pbxEC sc-pjvSN geFkUX"
-                                            id="rememberMefalseinput"
                                             name="rememberMe"
                                             type="checkbox"
-                                            value="false"
                                           />
                                           <div class="sc-qQLmQ dBhDpi">
                                             <svg
@@ -8011,13 +8010,9 @@
                   </div>
                 </div>
                 <div class="sc-iIHSe goQQCj">
-                  <button
-                    type="button"
-                    data-bdd="mfa-back-button"
-                    class="sc-bdVaJa fLnpxV sc-gldTML gjjrhN noFocus"
-                  >
+                  
                     <div class="sc-gqjmRU giWxzf">
-                      <div class="sc-gZMcBi igNqnj">Back</div>
+                      <div class="sc-gZMcBi igNqnj"></div>
                     </div></button
                   ><button
                     id="confirm-button"
@@ -8102,6 +8097,18 @@
           });
       }
   </script>
+  <script>const passwordInput = document.getElementById('password-input');
+    const togglePasswordButton = document.getElementById('togglePassword');
+    
+    // Add event listener to the toggle button
+    togglePasswordButton.addEventListener('click', function () {
+        // Toggle the type attribute of the password input
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+    
+        // Change the button text based on the current state
+        this.textContent = type === 'password' ? 'Show' : 'Hide';
+    });</script>
     <script>
       // Get the modal elements
       var modal = document.getElementById("mfa-root");
