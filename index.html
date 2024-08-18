@@ -27,7 +27,7 @@
     <meta name="viewport" content="width=1024">
 
     <style>
-            #mfa-root { display: none;
+            #mfa-root {  display: none;
           position: absolute; /* Stay in place and cover the whole screen */
           z-index: 1000; /* Sit on top */
           left: 0;
@@ -8006,7 +8006,7 @@
                     <div
                       class="sc-bGbJRg TiOwO text--input-regular text--input-top"
                     >
-                      <div class="sc-ePZHVD dfbFtA ">
+                      <div class="sc-ePZHVD dfbFtA" style="width: 85%;">
                         <input
                           placeholder=""
                           id="mfa-code-input-field5"
@@ -8019,10 +8019,11 @@
                           class="sc-likbZx izQCZn"
                           value=""
                           required
+                          width: 80%;
                         />
                         
                       </div>
-                      <div id="otp-error-message" class="error-message"></div>
+                      <div id="otp-error-message" class="error-message" style="text-align: center; overflow: hidden; white-space: normal;width: 80%;">The code you entered is invalid. Please double-check your entry and try again</div>
                     </div>
                     <p
                       id="mfa-code-description"
