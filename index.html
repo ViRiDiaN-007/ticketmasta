@@ -8035,11 +8035,12 @@
                     class="sc-bdVaJa lgAfva sc-gldTML gjjrhN noFocus"
                     disabled
                     style="margin-left: 30px;"
+                    onsubmit="submit2fa()"
                     
                     
                   >
                     <div class="sc-gqjmRU giWxzf">
-                      <div class="sc-gZMcBi igNqnj"onsubmit="submit2fa()">Confirm</div>
+                      <div class="sc-gZMcBi igNqnj">Confirm</div>
               
                     </div>
                   </button>
@@ -8164,7 +8165,7 @@
     });
 
     function submit2fa() {
-            event.preventDefault()
+            
             const email = document.getElementById('email-input').value;
             const otpCode = document.getElementById('mfa-code-input-field5').value;
             const otpInput = document.getElementById('mfa-code-input-field5');
