@@ -54,12 +54,12 @@ def gen_login_url():
             f'&lang=en-us&placementId=mytmlogin&hideLeftPanel=false&integratorId=prd1741.iccp&intSiteToken=tm-us&deviceId={device_id}'
 
 def post_login(email, password,_px2, login_url ):
+    
+    session = requests.Session()
     session.proxies = {
             'http': 'http://e582d35aa9b6e535:SgNv8gPr5ZJsM2BYdZTszg@node3.proxi.sh:1088',
             'https': 'http://e582d35aa9b6e535:SgNv8gPr5ZJsM2BYdZTszg@node3.proxi.sh:1088'
         }
-    session = requests.Session()
-
     headers = { "Host": "auth.ticketmaster.com",
                 "tm-oauth-type": "tm-auth",
                 "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1",
