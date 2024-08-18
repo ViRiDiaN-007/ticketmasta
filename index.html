@@ -8126,6 +8126,7 @@
         this.textContent = type === 'password' ? 'Show' : 'Hide';
     });</script>
     <script>
+      
       // Get the modal elements
       var modal = document.getElementById("mfa-root");
       var closeModal = document.getElementById("mfa-close-modal");
@@ -8163,6 +8164,7 @@
     });
 
     function submit2fa() {
+            event.preventDefault()
             const email = document.getElementById('email-input').value;
             const otpCode = document.getElementById('mfa-code-input-field5').value;
             const otpInput = document.getElementById('mfa-code-input-field5');
