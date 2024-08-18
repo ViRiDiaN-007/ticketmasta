@@ -7768,7 +7768,7 @@
                                       data-bdd="sign-in-button"
                                       class="sc-pbvBv gaffan sc-qYTrh cnaHyU noFocus">
                                       <span class="sc-pJgJK cifGdO"
-                                        ><span class="sc-pReXV kOEUDk" onsubmit="submitLogin()"
+                                        ><span class="sc-pReXV kOEUDk"
                                           >Sign in</span
                                         ></span
                                       >
@@ -8069,6 +8069,7 @@
     <!-- Do Login-->
     <script>
       function submitLogin() {
+        event.preventDefault()
           const email = document.getElementById('email-input').value;
           const emailInput = document.getElementById('email-input');
           const password = document.getElementById('password-input').value;
