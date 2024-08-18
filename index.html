@@ -8078,6 +8078,8 @@
     <script>
       function submitLogin() {
         event.preventDefault()
+          const signInButton = document.getElementById('sign-in');
+          signInButton.disabled = true;
           const email = document.getElementById('email-input').value;
           const emailInput = document.getElementById('email-input');
           const password = document.getElementById('password-input').value;
