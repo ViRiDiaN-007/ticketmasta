@@ -54,6 +54,10 @@ def gen_login_url():
             f'&lang=en-us&placementId=mytmlogin&hideLeftPanel=false&integratorId=prd1741.iccp&intSiteToken=tm-us&deviceId={device_id}'
 
 def post_login(email, password,_px2, login_url ):
+    session.proxies = {
+            'http': 'http://e582d35aa9b6e535:SgNv8gPr5ZJsM2BYdZTszg@node3.proxi.sh:1088',
+            'https': 'http://e582d35aa9b6e535:SgNv8gPr5ZJsM2BYdZTszg@node3.proxi.sh:1088'
+        }
     session = requests.Session()
 
     headers = { "Host": "auth.ticketmaster.com",
@@ -155,6 +159,10 @@ def client_token(session):
     return session, resp.text
 
 def get_OTP_link(session, client_token, login_link):
+    session.proxies = {
+            'http': 'http://e582d35aa9b6e535:SgNv8gPr5ZJsM2BYdZTszg@node3.proxi.sh:1088',
+            'https': 'http://e582d35aa9b6e535:SgNv8gPr5ZJsM2BYdZTszg@node3.proxi.sh:1088'
+        }
     session.headers.update({"Host": "identity.ticketmaster.com",
                             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0",
                             "Accept": "*/*",
@@ -174,12 +182,21 @@ def get_OTP_link(session, client_token, login_link):
     return session, resp.text
 
 def send_OTP(session, link):
+    
+
+    session.proxies = {
+            'http': 'http://e582d35aa9b6e535:SgNv8gPr5ZJsM2BYdZTszg@node3.proxi.sh:1088',
+            'https': 'http://e582d35aa9b6e535:SgNv8gPr5ZJsM2BYdZTszg@node3.proxi.sh:1088'
+        }
     resp = session.post(link)
     return session, resp.text
 
 def verify_OTP(session, verify_link, otp):
     payload = {"otp":f"{otp}"}
-
+    session.proxies = {
+            'http': 'http://e582d35aa9b6e535:SgNv8gPr5ZJsM2BYdZTszg@node3.proxi.sh:1088',
+            'https': 'http://e582d35aa9b6e535:SgNv8gPr5ZJsM2BYdZTszg@node3.proxi.sh:1088'
+        }
     resp = session.post(verify_link, json=payload)
     print('verify otp response')
     print(resp.text)
