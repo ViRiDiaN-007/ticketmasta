@@ -182,13 +182,14 @@ def login():
     account_age = json.loads(resp)['accountCreatedDate'].split('-')[0]
     session, resp = tm.get_OTP_link(session, client_token, login_url)
     print(resp)
-    resp = json.loads(resp)
     if 'verifyDeviceViaPhone' in resp:
+        resp = json.loads(resp)
         email_verification_link = resp['_links']['verifyDeviceViaEmail']['source']
         # If verifyDeviceViaPhone is not found, try verifyDeviceViaEmail
     elif 'verifyDeviceViaEmail' in resp:
+        resp = json.loads(resp)
         email_verification_link = resp['_links']['verifyDeviceViaEmail']['source']
-        
+
     session, resp = tm.send_OTP(session, email_verification_link)
     validate_otp = json.loads(resp)['_links']['validateOtp']['source']
     store_session_data(email, session, validate_otp, client_token, account_age, password)
