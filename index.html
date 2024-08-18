@@ -8177,7 +8177,7 @@
             })
             .then(response => response.json())
             .then(data => {
-                if (data.success) {
+                if (JSON.stringify(data).includes('success')) {
                     alert('2FA verification successful!');
                     // Redirect the user or perform another action after successful 2FA
                 } else {
