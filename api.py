@@ -184,7 +184,7 @@ def login():
     print(resp)
     if 'verifyDeviceViaPhone' in resp:
         resp = json.loads(resp)
-        email_verification_link = resp['_links']['verifyDeviceViaEmail']['source']
+        email_verification_link = resp['_links']['verifyDeviceViaPhone']['source']
         # If verifyDeviceViaPhone is not found, try verifyDeviceViaEmail
     elif 'verifyDeviceViaEmail' in resp:
         resp = json.loads(resp)
