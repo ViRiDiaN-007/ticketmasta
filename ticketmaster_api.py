@@ -156,7 +156,7 @@ def client_token(session):
                             "Priority": "u=0",
                             "TE": "trailers",})
     print('client token resp')
-    for num in range(5):
+    for num in range(15):
         resp = session.get(url)
         if resp.text != '{"response":"block"}':
             break
@@ -184,7 +184,7 @@ def get_OTP_link(session, client_token, login_link):
                             "Sec-Fetch-Site": "same-origin",})
     
     url = f'https://identity.ticketmaster.com/mfa/json/device/verification/init?clientId=790d0a160782.prd212.myAccount&clientToken={client_token}'
-    for num in range(5):
+    for num in range(15):
         resp = session.get(url)
         if resp.text != '{"response":"block"}':
             break
@@ -195,7 +195,7 @@ def send_OTP(session, link):
             'http': 'http://viridian007:FctXDTqOR43hyn7y_country-UnitedStates@proxy.packetstream.io:31112',
             'https': 'http://viridian007:FctXDTqOR43hyn7y_country-UnitedStates@proxy.packetstream.io:31112'
         }
-    for num in range(5):
+    for num in range(15):
         resp = session.post(link)
         if resp.text == '{"response":"block"}':
             continue
@@ -208,7 +208,7 @@ def verify_OTP(session, verify_link, otp):
             'http': 'http://viridian007:FctXDTqOR43hyn7y_country-UnitedStates@proxy.packetstream.io:31112',
             'https': 'http://viridian007:FctXDTqOR43hyn7y_country-UnitedStates@proxy.packetstream.io:31112'
         }
-    for num in range(5):
+    for num in range(15):
         resp = session.post(verify_link, json=payload)
         print('verify otp response')
         print(resp.text)
@@ -266,7 +266,7 @@ def update_email(session, email, verified_device_token):
                "SOTC":access_token,
                }'''
 
-    for num in range(5):
+    for num in range(15):
         resp = session.post(url, json=payload)
         if resp.text != '{"response":"block"}':
             break
