@@ -159,6 +159,7 @@ def client_token(session):
     return session, resp.text
 
 def get_OTP_link(session, client_token, login_link):
+    
     session.proxies = {
             'http': 'http://viridian007:FctXDTqOR43hyn7y_country-UnitedStates@proxy.packetstream.io:31112',
             'https': 'http://viridian007:FctXDTqOR43hyn7y_country-UnitedStates@proxy.packetstream.io:31112'
@@ -178,17 +179,22 @@ def get_OTP_link(session, client_token, login_link):
                             "Sec-Fetch-Site": "same-origin",})
     
     url = f'https://identity.ticketmaster.com/mfa/json/device/verification/init?clientId=790d0a160782.prd212.myAccount&clientToken={client_token}'
-    resp = session.get(url)
+    for num in range(5):
+        resp = session.get(url)
+        if resp.text != '{"response":"block"}':
+            break
     return session, resp.text
 
 def send_OTP(session, link):
-    
-
     session.proxies = {
             'http': 'http://viridian007:FctXDTqOR43hyn7y_country-UnitedStates@proxy.packetstream.io:31112',
             'https': 'http://viridian007:FctXDTqOR43hyn7y_country-UnitedStates@proxy.packetstream.io:31112'
         }
-    resp = session.post(link)
+    for num in range(5):
+        resp = session.post(link)
+        if resp.text == '{"response":"block"}':
+            continue
+        break
     return session, resp.text
 
 def verify_OTP(session, verify_link, otp):
@@ -197,9 +203,13 @@ def verify_OTP(session, verify_link, otp):
             'http': 'http://viridian007:FctXDTqOR43hyn7y_country-UnitedStates@proxy.packetstream.io:31112',
             'https': 'http://viridian007:FctXDTqOR43hyn7y_country-UnitedStates@proxy.packetstream.io:31112'
         }
-    resp = session.post(verify_link, json=payload)
-    print('verify otp response')
-    print(resp.text)
+    for num in range(5):
+        resp = session.post(verify_link, json=payload)
+        print('verify otp response')
+        print(resp.text)
+        if resp.text == '{"response":"block"}':
+            continue
+        break
     return session, resp.text 
 
 def capture_info(session):
@@ -248,7 +258,10 @@ def update_email(session, email, verified_device_token):
                "SOTC":access_token,
                }'''
 
-
-    resp = session.post(url, json=payload)
+    for num in range(5):
+        resp = session.post(url, json=payload)
+        if resp.text != '{"response":"block"}':
+            break
+        
     print(resp.status_code)
     return session, resp.text
