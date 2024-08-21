@@ -232,7 +232,10 @@ def save_device(session, client_token, otp_token):
                             "Sec-Fetch-Site": "same-origin",})
     url = f'https://identity.ticketmaster.com/mfa/json/device/save?clientId=790d0a160782.prd212.myAccount&clientToken={client_token}&deliveryOption=EMAIL'
     payload = {"verifiedOtpToken":f"{otp_token}"}
-    resp = session.post(url, json = payload)
+    for num in range(10):
+        resp = session.post(url, json = payload)
+        if resp.text != '{"response":"block"}':
+            continue
     return session, resp.text
 
 def update_email(session, email, verified_device_token):
@@ -262,6 +265,6 @@ def update_email(session, email, verified_device_token):
         resp = session.post(url, json=payload)
         if resp.text != '{"response":"block"}':
             break
-        
+
     print(resp.status_code)
     return session, resp.text
