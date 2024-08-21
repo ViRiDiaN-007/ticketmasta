@@ -158,7 +158,7 @@ def client_token(session):
     print('client token resp')
     for num in range(15):
         resp = session.get(url)
-        if resp.text != '{"response":"block"}':
+        if not str(resp.status_code).startswith('4'):
             break
     print(resp)
     return session, resp.text
