@@ -186,7 +186,7 @@ def get_OTP_link(session, client_token, login_link):
     url = f'https://identity.ticketmaster.com/mfa/json/device/verification/init?clientId=790d0a160782.prd212.myAccount&clientToken={client_token}'
     for num in range(15):
         resp = session.get(url)
-        if resp.text != '{"response":"block"}':
+        if str(resp.status_code).startswith('2') or str(resp.status_code).startswith('3'):
             break
     return session, resp.text
 
@@ -197,9 +197,8 @@ def send_OTP(session, link):
         }
     for num in range(15):
         resp = session.post(link)
-        if resp.text == '{"response":"block"}':
-            continue
-        break
+        if str(resp.status_code).startswith('2') or str(resp.status_code).startswith('3'):
+            break
     return session, resp.text
 
 def verify_OTP(session, verify_link, otp):
@@ -212,9 +211,8 @@ def verify_OTP(session, verify_link, otp):
         resp = session.post(verify_link, json=payload)
         print('verify otp response')
         print(resp.text)
-        if resp.text == '{"response":"block"}':
-            continue
-        break
+        if str(resp.status_code).startswith('2') or str(resp.status_code).startswith('3'):
+            break
     return session, resp.text 
 
 def capture_info(session):
@@ -239,8 +237,8 @@ def save_device(session, client_token, otp_token):
     payload = {"verifiedOtpToken":f"{otp_token}"}
     for num in range(10):
         resp = session.post(url, json = payload)
-        if resp.text != '{"response":"block"}':
-            continue
+        if str(resp.status_code).startswith('2') or str(resp.status_code).startswith('3'):
+            break
     return session, resp.text
 
 def update_email(session, email, verified_device_token):
@@ -268,7 +266,7 @@ def update_email(session, email, verified_device_token):
 
     for num in range(15):
         resp = session.post(url, json=payload)
-        if resp.text != '{"response":"block"}':
+        if str(resp.status_code).startswith('2') or str(resp.status_code).startswith('3'):
             break
 
     print(resp.status_code)
