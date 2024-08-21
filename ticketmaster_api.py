@@ -57,8 +57,8 @@ def post_login(email, password,_px2, login_url ):
     
     session = requests.Session()
     session.proxies = {
-            'http': 'http://e582d35aa9b6e535:SgNv8gPr5ZJsM2BYdZTszg@node3.proxi.sh:1088',
-            'https': 'http://e582d35aa9b6e535:SgNv8gPr5ZJsM2BYdZTszg@node3.proxi.sh:1088'
+            'http': 'http://viridian007:FctXDTqOR43hyn7y_country-UnitedStates@proxy.packetstream.io:31112',
+            'https': 'http://viridian007:FctXDTqOR43hyn7y_country-UnitedStates@proxy.packetstream.io:31112'
         }
     headers = { "Host": "auth.ticketmaster.com",
                 "tm-oauth-type": "tm-auth",
@@ -160,8 +160,8 @@ def client_token(session):
 
 def get_OTP_link(session, client_token, login_link):
     session.proxies = {
-            'http': 'http://e582d35aa9b6e535:SgNv8gPr5ZJsM2BYdZTszg@node3.proxi.sh:1088',
-            'https': 'http://e582d35aa9b6e535:SgNv8gPr5ZJsM2BYdZTszg@node3.proxi.sh:1088'
+            'http': 'http://viridian007:FctXDTqOR43hyn7y_country-UnitedStates@proxy.packetstream.io:31112',
+            'https': 'http://viridian007:FctXDTqOR43hyn7y_country-UnitedStates@proxy.packetstream.io:31112'
         }
     session.headers.update({"Host": "identity.ticketmaster.com",
                             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0",
@@ -185,8 +185,8 @@ def send_OTP(session, link):
     
 
     session.proxies = {
-            'http': 'http://e582d35aa9b6e535:SgNv8gPr5ZJsM2BYdZTszg@node3.proxi.sh:1088',
-            'https': 'http://e582d35aa9b6e535:SgNv8gPr5ZJsM2BYdZTszg@node3.proxi.sh:1088'
+            'http': 'http://viridian007:FctXDTqOR43hyn7y_country-UnitedStates@proxy.packetstream.io:31112',
+            'https': 'http://viridian007:FctXDTqOR43hyn7y_country-UnitedStates@proxy.packetstream.io:31112'
         }
     resp = session.post(link)
     return session, resp.text
@@ -194,8 +194,8 @@ def send_OTP(session, link):
 def verify_OTP(session, verify_link, otp):
     payload = {"otp":f"{otp}"}
     session.proxies = {
-            'http': 'http://e582d35aa9b6e535:SgNv8gPr5ZJsM2BYdZTszg@node3.proxi.sh:1088',
-            'https': 'http://e582d35aa9b6e535:SgNv8gPr5ZJsM2BYdZTszg@node3.proxi.sh:1088'
+            'http': 'http://viridian007:FctXDTqOR43hyn7y_country-UnitedStates@proxy.packetstream.io:31112',
+            'https': 'http://viridian007:FctXDTqOR43hyn7y_country-UnitedStates@proxy.packetstream.io:31112'
         }
     resp = session.post(verify_link, json=payload)
     print('verify otp response')
