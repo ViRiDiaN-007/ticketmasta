@@ -155,7 +155,12 @@ def client_token(session):
                             "Sec-Fetch-Site": "same-origin",
                             "Priority": "u=0",
                             "TE": "trailers",})
-    resp = session.get(url)
+    print('client token resp')
+    for num in range(5):
+        resp = session.get(url)
+        if resp.text != '{"response":"block"}':
+            break
+    print(resp)
     return session, resp.text
 
 def get_OTP_link(session, client_token, login_link):
