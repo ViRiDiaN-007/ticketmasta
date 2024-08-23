@@ -101,8 +101,6 @@ def post_login(email, password,_px2, login_url ):
                 
     resp = session.post('https://auth.ticketmaster.com/json/sign-in', headers=headers, cookies=cookies, json=payload,allow_redirects=False)
     #print(resp.text)
-    session.proxies.clear()
-
     return session, resp.text
 
 def parse_code(resp):
