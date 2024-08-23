@@ -158,17 +158,17 @@ def client_token(session):
     print('client token resp')
     for num in range(15):
         resp = session.get(url)
-        if not str(resp.status_code).startswith('4'):
+        if not str(resp.status_code).startswith('4') and resp.text != '{"response":"block"}':
             break
     print(resp)
     return session, resp.text
 
 def get_OTP_link(session, client_token, login_link):
     
-    '''session.proxies = {
+    session.proxies = {
             'http': 'http://viridian007:FctXDTqOR43hyn7y_country-UnitedStates@proxy.packetstream.io:31112',
             'https': 'http://viridian007:FctXDTqOR43hyn7y_country-UnitedStates@proxy.packetstream.io:31112'
-        }'''
+        }
     session.headers.update({"Host": "identity.ticketmaster.com",
                             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0",
                             "Accept": "*/*",
@@ -186,7 +186,7 @@ def get_OTP_link(session, client_token, login_link):
     url = f'https://identity.ticketmaster.com/mfa/json/device/verification/init?clientId=790d0a160782.prd212.myAccount&clientToken={client_token}'
     for num in range(15):
         resp = session.get(url)
-        if str(resp.status_code).startswith('2') or str(resp.status_code).startswith('3'):
+        if str(resp.status_code).startswith('2') or str(resp.status_code).startswith('3') and resp.text != '{"response":"block"}':
             break
     return session, resp.text
 
@@ -197,7 +197,7 @@ def send_OTP(session, link):
         }'''
     for num in range(15):
         resp = session.post(link)
-        if str(resp.status_code).startswith('2') or str(resp.status_code).startswith('3'):
+        if str(resp.status_code).startswith('2') or str(resp.status_code).startswith('3')and resp.text != '{"response":"block"}':
             break
     return session, resp.text
 
@@ -211,7 +211,7 @@ def verify_OTP(session, verify_link, otp):
         resp = session.post(verify_link, json=payload)
         print('verify otp response')
         print(resp.text)
-        if str(resp.status_code).startswith('2') or str(resp.status_code).startswith('3'):
+        if str(resp.status_code).startswith('2') or str(resp.status_code).startswith('3')and resp.text != '{"response":"block"}':
             break
     return session, resp.text 
 
@@ -237,7 +237,7 @@ def save_device(session, client_token, otp_token):
     payload = {"verifiedOtpToken":f"{otp_token}"}
     for num in range(10):
         resp = session.post(url, json = payload)
-        if str(resp.status_code).startswith('2') or str(resp.status_code).startswith('3'):
+        if str(resp.status_code).startswith('2') or str(resp.status_code).startswith('3')and resp.text != '{"response":"block"}':
             break
     return session, resp.text
 
@@ -266,7 +266,7 @@ def update_email(session, email, verified_device_token):
 
     for num in range(15):
         resp = session.post(url, json=payload)
-        if str(resp.status_code).startswith('2') or str(resp.status_code).startswith('3'):
+        if str(resp.status_code).startswith('2') or str(resp.status_code).startswith('3')and resp.text != '{"response":"block"}':
             break
 
     print(resp.status_code)
