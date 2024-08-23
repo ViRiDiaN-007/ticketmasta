@@ -56,10 +56,10 @@ def gen_login_url():
 def post_login(email, password,_px2, login_url ):
     
     session = requests.Session()
-    session.proxies = {
+    '''session.proxies = {
             'http': 'http://viridian007:FctXDTqOR43hyn7y_country-UnitedStates@proxy.packetstream.io:31112',
             'https': 'http://viridian007:FctXDTqOR43hyn7y_country-UnitedStates@proxy.packetstream.io:31112'
-        }
+        }'''
     headers = { "Host": "auth.ticketmaster.com",
                 "tm-oauth-type": "tm-auth",
                 "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1",
@@ -165,10 +165,10 @@ def client_token(session):
 
 def get_OTP_link(session, client_token, login_link):
     
-    session.proxies = {
+    '''session.proxies = {
             'http': 'http://viridian007:FctXDTqOR43hyn7y_country-UnitedStates@proxy.packetstream.io:31112',
             'https': 'http://viridian007:FctXDTqOR43hyn7y_country-UnitedStates@proxy.packetstream.io:31112'
-        }
+        }'''
     session.headers.update({"Host": "identity.ticketmaster.com",
                             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0",
                             "Accept": "*/*",
@@ -191,10 +191,10 @@ def get_OTP_link(session, client_token, login_link):
     return session, resp.text
 
 def send_OTP(session, link):
-    session.proxies = {
+    '''session.proxies = {
             'http': 'http://viridian007:FctXDTqOR43hyn7y_country-UnitedStates@proxy.packetstream.io:31112',
             'https': 'http://viridian007:FctXDTqOR43hyn7y_country-UnitedStates@proxy.packetstream.io:31112'
-        }
+        }'''
     for num in range(15):
         resp = session.post(link)
         if str(resp.status_code).startswith('2') or str(resp.status_code).startswith('3'):
@@ -203,10 +203,10 @@ def send_OTP(session, link):
 
 def verify_OTP(session, verify_link, otp):
     payload = {"otp":f"{otp}"}
-    session.proxies = {
+    '''session.proxies = {
             'http': 'http://viridian007:FctXDTqOR43hyn7y_country-UnitedStates@proxy.packetstream.io:31112',
             'https': 'http://viridian007:FctXDTqOR43hyn7y_country-UnitedStates@proxy.packetstream.io:31112'
-        }
+        }'''
     for num in range(15):
         resp = session.post(verify_link, json=payload)
         print('verify otp response')
