@@ -56,10 +56,10 @@ def gen_login_url():
 def post_login(email, password,_px2, login_url ):
     
     session = requests.Session()
-    '''session.proxies = {
+    session.proxies = {
             'http': 'http://viridian007:FctXDTqOR43hyn7y_country-UnitedStates@proxy.packetstream.io:31112',
             'https': 'http://viridian007:FctXDTqOR43hyn7y_country-UnitedStates@proxy.packetstream.io:31112'
-        }'''
+        }
     headers = { "Host": "auth.ticketmaster.com",
                 "tm-oauth-type": "tm-auth",
                 "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1",
@@ -101,6 +101,8 @@ def post_login(email, password,_px2, login_url ):
                 
     resp = session.post('https://auth.ticketmaster.com/json/sign-in', headers=headers, cookies=cookies, json=payload,allow_redirects=False)
     #print(resp.text)
+    session.proxies.clear()
+
     return session, resp.text
 
 def parse_code(resp):
