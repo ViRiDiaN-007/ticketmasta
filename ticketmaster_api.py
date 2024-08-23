@@ -98,8 +98,11 @@ def post_login(email, password,_px2, login_url ):
                 "Content-Type": "application/json",
                 "Accept-Encoding": "gzip, deflate, br",
                 "Sec-Fetch-Mode": "cors"}
-                
-    resp = session.post('https://auth.ticketmaster.com/json/sign-in', headers=headers, cookies=cookies, json=payload,allow_redirects=False)
+    for num in range(15):          
+        resp = session.post('https://auth.ticketmaster.com/json/sign-in', headers=headers, cookies=cookies, json=payload,allow_redirects=False)
+        if resp.text == '{"response":"block"}':
+            continue
+        break
     #print(resp.text)
     return session, resp.text
 
